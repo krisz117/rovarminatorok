@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Dokumentáció</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link id="theme-style" rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+
+  <style>
+    .theme-toggle {
+      position: fixed;
+      top: 10px;
+      right: 15px;
+      z-index: 999;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: #444;
+      color: white;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="theme-toggle" onclick="toggleTheme()">🌙 Dark</div>
+  <div id="app">Betöltés...</div>
+
+  <script>
+    const darkTheme = "//cdn.jsdelivr.net/npm/docsify/lib/themes/dark.css";
+    const lightTheme = "//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css";
+
+    function toggleTheme() {
+      const theme = document.getElementById('theme-style');
+      const isDark = theme.getAttribute('href') === darkTheme;
+      theme.setAttribute('href', isDark ? lightTheme : darkTheme);
+      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+
+    (function () {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'dark') {
+        document.getElementById('theme-style').setAttribute('href', darkTheme);
+      }
+    })();
+
+    window.$docsify = {
+      name: '📚 Saját Dokumentáció',
+      loadSidebar: true,
+      subMaxLevel: 2,
+      search: {
+        maxAge: 86400000,
+        paths: 'auto',
+        placeholder: 'Keresés...',
+        noData: 'Nincs találat',
+      }
+    }
+  </script>
+
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+</body>
+</html>
