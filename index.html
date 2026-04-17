@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Egyszerű, rendezett Docsify dokumentáció webes és JavaScript alapokkal.">
 
-  <link id="theme-style" rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+  <link id="theme-style" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
 
   <style>
     :root {
@@ -137,6 +137,23 @@
       font-weight: 700;
     }
 
+    .runtime-notice {
+      margin: 16px 40px 0;
+      padding: 14px 16px;
+      border: 1px solid #f59e0b;
+      border-radius: 12px;
+      background: #fff7ed;
+      color: #9a3412;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    body[data-theme="dark"] .runtime-notice {
+      background: #3a2412;
+      border-color: #f59e0b;
+      color: #fed7aa;
+    }
+
     @media (max-width: 768px) {
       .theme-toggle {
         top: 12px;
@@ -155,8 +172,8 @@
   <div id="app">Betöltés...</div>
 
   <script>
-    const darkTheme = "//cdn.jsdelivr.net/npm/docsify/lib/themes/dark.css";
-    const lightTheme = "//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css";
+    const darkTheme = "https://cdn.jsdelivr.net/npm/docsify/lib/themes/dark.css";
+    const lightTheme = "https://cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css";
     const themeToggle = document.getElementById('theme-toggle');
 
     function setTheme(mode) {
@@ -178,6 +195,13 @@
       setTheme(saved);
     })();
 
+    if (window.location.protocol === 'file:') {
+      const notice = document.createElement('div');
+      notice.className = 'runtime-notice';
+      notice.innerHTML = 'Az oldalsó navigáció és a kereső Docsify alatt helyi szerverről működik megbízhatóan. Indítás: <code>npx docsify serve .</code>';
+      document.body.insertBefore(notice, document.getElementById('app'));
+    }
+
     window.$docsify = {
       name: '📚 Saját Dokumentáció',
       homepage: 'README.md',
@@ -193,7 +217,7 @@
     }
   </script>
 
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
 </body>
 </html>
