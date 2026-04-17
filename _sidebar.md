@@ -1,7 +1,13 @@
 # 📚 Tartalom
 
-- [Főoldal](README.md)
-- [Web fejlesztés](web.md)
-- [JavaScript alapok](javascript-alapok.md)
-- [AI alapok](ai.md)
-- [Jegyzetek](jegyzetek.md)
+- [Főoldal](/)
+
+- Kezdés
+  - [Jegyzetek](jegyzetek.md)
+
+- Webes alapok
+  - [Web fejlesztés](web.md)
+  - [JavaScript alapok](javascript-alapok.md)
+
+- AI
+  - [AI alapok](ai.md)
