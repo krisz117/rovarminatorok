@@ -2,11 +2,12 @@
 
 - [Főoldal](/)
 
-## 🤖 AI
-- [AI alapok](ai.md)
+- Kezdés
+  - [Jegyzetek](jegyzetek.md)
 
-## 🌐 Web
-- [Web fejlesztés](web.md)
+- Webes alapok
+  - [Web fejlesztés](web.md)
+  - [JavaScript alapok](javascript-alapok.md)
 
-## 📝 Jegyzetek
-- [Jegyzetek](jegyzetek.md)
+- AI
+  - [AI alapok](ai.md)

@@ -4,50 +4,186 @@
   <meta charset="UTF-8">
   <title>Dokumentáció</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Egyszerű, rendezett Docsify dokumentáció webes és JavaScript alapokkal.">
 
   <link id="theme-style" rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
 
   <style>
+    :root {
+      --page-bg: #f6f7fb;
+      --surface: #ffffff;
+      --text: #1f2937;
+      --muted: #5b6472;
+      --border: #e5e7eb;
+      --accent: #0f766e;
+      --accent-soft: #e6fffb;
+      --code-bg: #f3f4f6;
+      --shadow: 0 14px 40px rgba(15, 23, 42, 0.08);
+    }
+
+    body[data-theme="dark"] {
+      --page-bg: #0b1220;
+      --surface: #111827;
+      --text: #e5eef9;
+      --muted: #9fb0c4;
+      --border: #243244;
+      --accent: #5eead4;
+      --accent-soft: #102a35;
+      --code-bg: #0f172a;
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    body {
+      background: linear-gradient(180deg, var(--page-bg) 0%, var(--page-bg) 100%);
+      color: var(--text);
+    }
+
     .theme-toggle {
       position: fixed;
-      top: 10px;
-      right: 15px;
+      top: 14px;
+      right: 18px;
       z-index: 999;
       cursor: pointer;
-      padding: 6px 10px;
-      border-radius: 6px;
-      background: #444;
-      color: white;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
       font-size: 14px;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar {
+      width: 290px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+    }
+
+    .content {
+      padding-top: 32px;
+    }
+
+    .markdown-section {
+      max-width: 860px;
+      padding: 24px 40px 80px;
+      color: var(--text);
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .markdown-section h1,
+    .markdown-section h2,
+    .markdown-section h3 {
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .markdown-section h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .markdown-section h2 {
+      margin-top: 2.6rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .markdown-section p,
+    .markdown-section li {
+      color: var(--muted);
+    }
+
+    .markdown-section strong,
+    .markdown-section a {
+      color: var(--accent);
+    }
+
+    .markdown-section code {
+      background: var(--code-bg);
+      border-radius: 6px;
+      padding: 0.15em 0.4em;
+    }
+
+    .markdown-section pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .markdown-section blockquote {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 10px 16px;
+      color: var(--text);
+    }
+
+    .sidebar ul li.active > a {
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .sidebar a,
+    .sidebar-nav a {
+      color: var(--text);
+    }
+
+    .sidebar .app-name {
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .theme-toggle {
+        top: 12px;
+        right: 12px;
+        padding: 8px 12px;
+      }
+
+      .markdown-section {
+        padding: 20px 20px 64px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="theme-toggle" onclick="toggleTheme()">🌙 Dark</div>
+  <button id="theme-toggle" class="theme-toggle" onclick="toggleTheme()">🌙 Sötét</button>
   <div id="app">Betöltés...</div>
 
   <script>
     const darkTheme = "//cdn.jsdelivr.net/npm/docsify/lib/themes/dark.css";
     const lightTheme = "//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css";
+    const themeToggle = document.getElementById('theme-toggle');
+
+    function setTheme(mode) {
+      const theme = document.getElementById('theme-style');
+      const isDark = mode === 'dark';
+      theme.setAttribute('href', isDark ? darkTheme : lightTheme);
+      document.body.setAttribute('data-theme', mode);
+      localStorage.setItem('theme', mode);
+      themeToggle.textContent = isDark ? '☀️ Világos' : '🌙 Sötét';
+    }
 
     function toggleTheme() {
-      const theme = document.getElementById('theme-style');
-      const isDark = theme.getAttribute('href') === darkTheme;
-      theme.setAttribute('href', isDark ? lightTheme : darkTheme);
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
+      const current = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+      setTheme(current === 'dark' ? 'light' : 'dark');
     }
 
     (function () {
-      const saved = localStorage.getItem('theme');
-      if (saved === 'dark') {
-        document.getElementById('theme-style').setAttribute('href', darkTheme);
-      }
+      const saved = localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
+      setTheme(saved);
     })();
 
     window.$docsify = {
       name: '📚 Saját Dokumentáció',
+      homepage: 'README.md',
       loadSidebar: true,
-      subMaxLevel: 2,
+      subMaxLevel: 3,
+      auto2top: true,
       search: {
         maxAge: 86400000,
         paths: 'auto',
