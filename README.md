@@ -11,6 +11,14 @@ Ha most nyitod meg az oldalt, érdemes ebben a sorrendben haladni:
 3. [AI alapok](ai.md)
 4. [Jegyzetek](jegyzetek.md)
 
+## Elérhető oldalak
+
+- [Főoldal](README.md)
+- [Web fejlesztés](web.md)
+- [JavaScript alapok](javascript-alapok.md)
+- [AI alapok](ai.md)
+- [Jegyzetek](jegyzetek.md)
+
 ## Mit találsz itt?
 
 ### Webes alapok
